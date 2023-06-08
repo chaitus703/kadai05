@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入力フォーム</title>
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    
+
+<!-- contact -->
+<section id="Contact">
+    <div class="form_01">
+        <h2 class="text-center title_b">Your profile</h2>
+        <h3 class="text-center t1">あなたのプロフィール情報を入力してください</h3>
+    <form action="#" method="post">
+        <dl class="text-center">
+            <div class="form_inner">
+                <dt class="form_title"><P>名前</P></dt>
+                <div class="item_left">
+                    <dd class="form_item"><input type="text" name="uname" id="uname" class="form_parts"></dd>
+                </div>
+            </div>
+            <div class="form_inner2">
+                <dt class="form_title2"><P>一言紹介<br><br>（キャッチコピー）</P></dt>
+                <div class="item_left2">
+                    <dd class="form_item2">
+                        <textarea name="text" id="text" class="form_parts2"></textarea>
+                    </dd>
+                </div>
+            </div>
+            <div class="form_inner3">
+                <dt class="form_title2"><P>About<br><br>（ご挨拶・趣味など）</P></dt>
+                <div class="item_left2">
+                    <dd class="form_item2">
+                        <textarea name="text2" id="text2" class="form_parts2"></textarea>
+                    </dd>
+                </div>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                <div id="dragDropArea">
+                    <div class="drag-drop-inside">
+                        <h1>あなたを象徴するTOPイメージを選択</h1>
+                        <p class="drag-drop-info">ここにファイルをドロップ</p>
+                        <p>または</p>
+                        <p class="drag-drop-buttons">
+                            <input id="fileInput" type="file" accept="image/*" value="ファイルを選択" name="photo" onChange="photoPreview(event)">
+                        </p>
+                        <div id="previewArea"></div><br>
+                        <button type="submit" name="submit" value="登録">登録</button>
+                    </div>
+                </div>
+
+            </form>
+        </dl>
+        <input type="submit" value="送信" class="btn1" id="send">
+    </form>
+    <div class="space">
+        <a href="index_p01.html" target="_blank" class="btn_m">表示イメージを見る</a>
+    </div> 
+    <div>
+        <!-- <div>
+            名前：<input type="text" id="uname">
+        </div> -->
+        <!-- <div>
+            About：<textarea id="text" cols="30" rows="10"></textarea>
+            <button id="send">送信</button>
+        </div> -->
+        <div id="output" style="overflow: auto;height: 300px;"></div>
+    </div>
+</section>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/script.js"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module">
+        
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+            from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "***************************",
+            authDomain: "***************************",
+            projectId: "***************************",
+            storageBucket: "***************************",
+            messagingSenderId: "***************************",
+            appId: "***************************"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app); //RealtimeDBに接続
+        const dbRef = ref(db, "mydata"); //RealtimeDB内の"mydata"を使う
+        
+        //Storage の画像を表示させる
+	    var form = document.querySelector('fileInput');
+	    form.addEventListener('submit', function (e) {
+		e.preventDefault();
+		var imgs = form.querySelector('fileInput');
+		var uploads = [];
+		for (var file of imgs.files) {
+			var storageRef = firebase.storage().ref('form-uploaded/' + file.name);
+			uploads.push(storageRef.put(file));
+		}
+		Promise.all(uploads).then(function () {
+			alert('アップロード完了');
+		});
+	    });
+
+        //データ登録(Click)
+        $("#send").on("click",function(){
+            const uname = $("#uname").val();
+            const text = $("#text").val();
+            const text2 = $("#text2").val();
+            // alert(uname+text);
+            const msg = {
+                uname:$("#uname").val(),
+                text:$("#text").val(),
+                text2:$("#text2").val()
+            }
+            const newPostRef = push(dbRef);
+            set(newPostRef,msg);
+
+            // 文字を空っぽにする
+            $("#uname").val("");
+            $("#text").val("");
+            $("#text2").val("");
+        });
+
+        //データ登録(Enter)
+
+        //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+        onChildAdded(dbRef,function(data){
+            const msg = data.val();
+            const key = data.key;
+            // let h = '<p>';
+            //     h += msg.uname;
+            //     h += '<br>';
+            //     h += msg.text;
+            //     h += '</p>';
+            //     $("#output").append(h);
+
+            let h =`
+            <div>
+                <p>${msg.uname}</p>
+                <p>${msg.text}</p>
+                <p>${msg.text2}</p>
+            </div>
+            `
+            $("#output").append(h);
+        });
+
+
+
+
+    </script>
+</body>
+</html>

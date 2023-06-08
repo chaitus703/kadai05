@@ -1,0 +1,48 @@
+.text-center{text-align: center;}
+.main_box{
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+.left_box {
+   background-color:#6C676E;
+   width:250px;
+   height:550px;
+   text-align:center;
+    } 
+ 
+.right_box {
+   background-color:rgb(248, 245, 239);
+   width: 550px;
+   height:550px;
+   text-align:center;
+    }
+ 
+article {
+   display:flex;/*サイドバーとメインコンテンツを横並びにする指定をした*/
+    }
+ 
+
+.main{margin: 0 auto;
+    display: flex;}
+
+.uname{
+    text-transform: uppercase;
+    padding-top:60px;
+    padding-bottom:30px;
+    font-size: 24px;
+    font-weight: bold;
+    color:#FAF9F7;
+    }
+.title_b{
+    text-transform: uppercase;
+    padding-top:60px;
+    padding-bottom:30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4d4c49;
+    }
+
+p { font-size: 16px;}
+

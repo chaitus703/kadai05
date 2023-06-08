@@ -1,0 +1,146 @@
+/* ここから下に記載していく */
+@charset "utf-8";
+html{font-size: 62.5%;}
+.text-center{text-align: center;}
+.t1{
+    padding-bottom:60px;
+    font-size: 18px;
+    }
+p { font-size: 16px;}
+p {text-decoration: none;}
+.title_b{
+    text-transform: uppercase;
+    padding-top:60px;
+    padding-bottom:30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    }
+.space{padding-top: 40px;
+    padding-bottom: 40px;}
+
+.btn1{
+    display: block;
+    width: 300px;
+    padding: 21px 0;
+    margin: auto;
+    background-color: #ffd61a;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    }
+
+.form_01{
+    width: 640px;
+    margin: auto;
+    }
+.form_inner{
+    display: flex;
+    flex-wrap: wrap;
+    border-top: #bfbfbf 2px solid;
+    width: 640px;
+    height: 52px;
+    }
+.form_title{
+    text-align: left;
+    width: 208px;
+    height: 200px;
+    margin: 18px 16px 18px;
+    font-size: 15px;
+    }
+.item_left{
+    border-left: #bfbfbf 2px solid;
+    text-align: left;
+    height: 52px;
+    }
+.form_item{
+    text-align: left;
+    width: 328px;
+    height: 36px;
+    margin: 8px 8px 8px;
+    }
+.form_parts{
+    box-sizing: border-box;
+    border:  #bfbfbf 1px solid;
+    font-size: 15px;
+    width: 100%;
+    height: 36px;
+    }
+
+.form_parts2{
+    box-sizing: border-box;
+    border:  #bfbfbf 1px solid;
+    font-size: 15px;
+    width: 100%;
+    height: 100px;
+    }
+.form_inner2{
+    display: flex;
+    flex-wrap: wrap;
+    border-top: #bfbfbf 2px solid;
+    width: 640px;
+    height: 116px;
+    }
+.form_title2{
+    text-align: left;
+    width: 208px;
+    height: 116px;
+    margin: 18px 16px 18px;
+    }
+.item_left2{
+    border-left: #bfbfbf 2px solid;
+    text-align: left;
+    height: 116px;
+    }
+.form_item2{
+    text-align: left;
+    width: 328px;
+    height: 116px;
+    margin: 8px 8px 8px;
+    }
+.form_inner3{
+    display: flex;
+    flex-wrap: wrap;
+    border-top: #bfbfbf 2px solid;
+    border-bottom: #bfbfbf 2px solid;
+    width: 640px;
+    height: 116px;
+    margin-bottom: 20px;
+    }
+.btn_m{
+    display: block;
+    width: 300px;
+    padding: 21px 0;
+    margin: auto;
+    background-color: #0077d9;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    border: none;
+    }
+h1 {font-size: 21px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    }
+#dragDropArea{
+    background-color: #f4f4f4;
+    border: #ddd dashed 5px;
+    min-height: 200px;
+    text-align: center;
+    margin-bottom: 40px;
+    }
+#dragDropArea p{
+    color: #999;
+    font-weight: bold;
+    font-size: 14px;
+    font-size: 1.4em;
+    }
+#dragDropArea .drag-drop-buttons{
+    margin-top: 20px;
+    font-size: 12px;
+    font-size: 1.2em;
+    }
+.drag-drop-buttons input{
+    margin: auto;
+    }

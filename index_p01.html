@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style_p01.css">
+    <title>自己紹介_01</title>
+</head>
+<body>
+    <main class="text-center top">
+        <div class="top_img">
+            <img src="img/01.jpg" alt="TOP画像">
+        </div>
+        <article>
+            <div class="text-center main_box">
+                <div class="left_box">
+                    <img src="img/02.jpg" alt="アイコン画像">
+                    <p class="text-center uname" id="output1"></p>
+                    <p class="text-center text" id="output2"></p>
+                </div>
+                <div class="right_box">
+                    <h2 class="text-center title_b">About me</h2>
+                    <p class="text-center text2" id="output3"></p>
+                    </div>
+                </div> 
+            </main>
+        </article>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="js/script.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="module">
+         // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+            from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "***************************",
+            authDomain: "***************************",
+            projectId: "***************************",
+            storageBucket: "***************************",
+            messagingSenderId: "***************************",
+            appId: "***************************"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app); //RealtimeDBに接続
+        const dbRef = ref(db, "mydata"); //RealtimeDB内の"mydata"を使う
+        
+
+
+
+
+        //データ登録(Click)
+        $("#send").on("click",function(){
+            const uname = $("#uname").val();
+            const text = $("#text").val();
+            const text2 = $("#text2").val();
+            // alert(uname+text);
+            const msg = {
+                uname:$("#uname").val(),
+                text:$("#text").val(),
+                text2:$("#text2").val()
+            }
+            const newPostRef = push(dbRef);
+            set(newPostRef,msg);
+
+            // 文字を空っぽにする
+            $("#uname").val("");
+            $("#text").val("");
+            $("#text2").val("");
+        });
+
+        //データ登録(Enter)
+
+        //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+        onChildAdded(dbRef,function(data){
+            const msg = data.val();
+            const key = data.key;
+            // let h = '<p>';
+            //     h += msg.uname;
+            //     h += '<br>';
+            //     h += msg.text;
+            //     h += '</p>';
+            //     $("#output").append(h);
+
+            let h1 =`
+            <div>
+                <p>${msg.uname}</p>
+            </div>
+            `
+            let h2 =`
+            <div>
+                <p>${msg.text}</p>
+            </div>
+            `
+            let h3 =`
+            <div>
+                <p>${msg.text2}</p>
+            </div>
+            `
+            $("#output1").append(h1);
+            $("#output2").append(h2);
+            $("#output3").append(h3);
+        });
+    </script>
+    </main>
+</body>
+</html>
